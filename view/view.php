@@ -51,7 +51,7 @@ function htmlNavbar($titrePage)
 								<a class="nav-link" href="indexAccueil.php"><i class="fas fa-home fa-fw mr-2"></i>Blog Home <span class="sr-only">(current)</span></a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="indexBlog-post.php"><i class="fas fa-bookmark fa-fw mr-2"></i>Blog Post</a>
+								<a class="nav-link" href="indexBlog-post.php?article=1"><i class="fas fa-bookmark fa-fw mr-2"></i>Blog Post</a>
 							</li>
 						</ul>
 
@@ -85,17 +85,17 @@ function enteteBloglist()
 			}
 
 
-			function articleBlogList($lAccroche,$lPhoto,$lDate)
+			function articleBlogList($lNumArticle,$lAccroche,$lPhoto,$lDate)
 			{				
 				?>
 					<div class="item mb-5">
 						<div class="media">
 							<img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="assets/images/blog/<?=$lPhoto?>" alt="image">
 							<div class="media-body">
-								<h3 class="title mb-1"><a href="blog-post.html"><?=$lAccroche?></a></h3>
+								<h3 class="title mb-1"><a href="indexBlog-post.php?article=<?=$lNumArticle?>"><?=$lAccroche?></a></h3>
 								<div class="meta mb-1"><span class="date"><?=$lDate?></span></a></span></div>
 								<div class="intro"></div>
-								<a class="more-link" href="blog-post.html">Read more &rarr;</a>
+								<a class="more-link" href="indexBlog-post.php?article=<?=$lNumArticle?>">Read more &rarr;</a>
 							</div>
 							<!--//media-body-->
 						</div>
@@ -105,7 +105,7 @@ function enteteBloglist()
 				}
 			
 
-			function article()
+			function article($lAccroche,$lDescription,$lPhoto,$lDate)
 			{ ?>
 			    
 				<div class="main-wrapper">
@@ -113,29 +113,66 @@ function enteteBloglist()
 	    <article class="blog-post px-3 py-5 p-md-5">
 		    <div class="container">
 			    <header class="blog-post-header">
-				    <h2 class="title mb-2">Why Every Developer Should Have A Blog</h2>
-				    <div class="meta mb-3"><span class="date">Published 3 months ago</span><span class="time">5 min read</span><span class="comment"><a href="#">4 comments</a></span></div>
+				    <h2 class="title mb-2"><?=$lAccroche?></h2>
+				    <div class="meta mb-3"><span class="date"><?=$lDate?></span></div>
 			    </header>
 			    
 			    <div class="blog-post-body">
 				    <figure class="blog-banner">
-				        <a href="https://made4dev.com"><img class="img-fluid" src="assets/images/blog/blog-post-banner.jpg" alt="image"></a>
-				        <figcaption class="mt-2 text-center image-caption">Image Credit: <a href="https://made4dev.com?ref=devblog" target="_blank">made4dev.com (Premium Programming T-shirts)</a></figcaption>
+				        <img class="img-fluid" src="assets/images/blog/<?=$lPhoto?>" alt="image">
 				    </figure>
-				    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. </p>
+				    <p><?=$lDescription?></p>
   
 			
 			<?php 
 			}
 
-			function footerNavbarScriptJS()
+			function footerNavbarArticle($lNumArticle)
 			{
 				?>
 					<nav class="blog-nav nav nav-justified my-5">
-						<a class="nav-link-prev nav-item nav-link d-none rounded-left" href="#">Previous<i class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
-						<a class="nav-link-next nav-item nav-link rounded" href="blog-list.html">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
+						<a class="nav-link-prev nav-item nav-link rounded-left" href="indexBlog-post.php?article=<?=$lNumArticle - 1 ?>">Previous<i class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
+						<a class="nav-link-next nav-item nav-link rounded" href="indexBlog-post.php?article=<?=$lNumArticle + 1 ?>">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
 					</nav>
 
+			<?php 
+			}
+
+			function footerNavbarFirstArticle($lNumArticle)
+			{
+				?>
+					<nav class="blog-nav nav nav-justified my-5">
+					<a class="nav-link-next nav-item nav-link rounded" href="indexBlog-post.php?article=<?=$lNumArticle + 1 ?>">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
+					</nav>
+
+			<?php 
+			}
+			
+
+			function footerNavbarLastArticle($lNumArticle)
+			{
+				?>
+					<nav class="blog-nav nav nav-justified my-5">
+						<a class="nav-link-prev nav-item nav-link rounded-left" href="indexBlog-post.php?article=<?=$lNumArticle - 1 ?>">Previous<i class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
+					</nav>
+
+			<?php 
+			}
+			
+			function footerNavbarListe()
+			{
+				?>
+					<nav class="blog-nav nav nav-justified my-5">
+						<a class="nav-link-prev nav-item nav-link rounded-left" href="#">Previous<i class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
+						<a class="nav-link-next nav-item nav-link rounded" href="indexBlog-post.php">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
+					</nav>
+				
+			<?php 
+			}
+			
+			function ScriptJS()
+			{
+			?>
 				</div>
 			</section>
 		</div>

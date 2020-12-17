@@ -14,10 +14,12 @@
 	
 
 	foreach(getAllArticle() as $lRow){
-	articleBlogList($lRow['accroche'],$lRow['photo'],$lRow['date']);
+	articleBlogList($lRow['ID'],$lRow['accroche'],$lRow['photo'],$lRow['date']);
 	}
 
-	footerNavbarScriptJS();
+	footerNavbarListe();
+
+	ScriptJS();
 	
 
 	

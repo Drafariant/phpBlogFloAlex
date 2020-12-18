@@ -1,3 +1,4 @@
+
 <?php
 
 function htmlNavbar($titrePage)
@@ -187,6 +188,7 @@ function enteteBloglist()
 
 
 	</body>
+
 
 	</html>
 <?php
